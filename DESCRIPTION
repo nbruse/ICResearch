@@ -1,0 +1,20 @@
+Package: ICResearch
+Type: Package
+Title: A toolset of frequently used functions at the ICU Research
+Version: 0.1.0
+Author: Niklas Bruse <Niklas.Bruse@radboudumc.nl>
+Maintainer: Niklas Bruse <Niklas.Bruse@radboudumc.nl>
+Description: A toolset of frequently used functions at the ICU Research. It supplies different functions used during the analysis of especially large COVID datasets. The main functions are used for alignment (scaling) and binning data either in combination with or independantly from eachother.
+License: file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports:
+    xlsx,
+    readxl,
+    stringr,
+    dplyr,
+    plyr,
+    taRifx,
+    rlist,
+    DescTools
+RoxygenNote: 7.1.1
