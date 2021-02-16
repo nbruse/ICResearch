@@ -95,8 +95,9 @@ align <- function(input,
     }
 
     # Create and clean up output df
-    options(stringsAsFactors=FALSE) # I changed this to negate any NAs caused by factors
     out<-ldply(df.list, rbind)
+    indx <- sapply(out, is.factor)
+    out[indx] <- lapply(out[indx], function(x) as.numeric(as.character(x))) # I changed this to negate any NAs caused by factors
     rownames(out)<-out[,1]
     out[,1]<- NULL
     alig.temp <- out$alignment_day
