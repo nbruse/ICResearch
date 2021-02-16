@@ -107,7 +107,7 @@ align <- function(input,
     start <- as.numeric(colnames(out)[1])
     drop<-c()
     for(i in start:colnames(out)[ncol(out)]){
-      count = sum(out[,as.character(i)],na.rm = T)
+      count = sum(as.numeric(out[,as.character(i)]),na.rm = T) # I changed this to negate any NAs caused by factors
       if(count == 0){
         drop<-c(drop,as.character(i))
       } else {
