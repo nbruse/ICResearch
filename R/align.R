@@ -95,6 +95,7 @@ align <- function(input,
     }
 
     # Create and clean up output df
+    options(stringsAsFactors=FALSE) # I changed this to negate any NAs caused by factors
     out<-ldply(df.list, rbind)
     rownames(out)<-out[,1]
     out[,1]<- NULL
@@ -118,7 +119,7 @@ align <- function(input,
     start2 <- as.numeric(colnames(out)[ncol(out)])
     drop<-c()
     for(i in start2:colnames(out)[1]){
-      count = sum(out[,as.character(i)],na.rm = T)
+      count = sum(as.numeric(out[,as.character(i)]),na.rm = T) # I changed this to negate any NAs caused by factors
       if(count == 0){
         drop<-c(drop,as.character(i))
       } else {
