@@ -36,11 +36,11 @@ binning <- function(input,
 
   # Read input file and clean it up
   if(input.format == "csv"){
-    df<-read.csv(input)
+    df<-read.csv(input, stringsAsFactors = F)
   } else if(input.format == "csv2"){
-    df<-read.csv2(input)
+    df<-read.csv2(input, stringsAsFactors = F)
   } else if(input.format == "xlsx"){
-    df<-read.xlsx(input, sheetIndex = 1)
+    df<-read.xlsx(input, sheetIndex = 1, stringsAsFactors = F)
   } else {
     print("csv argument has to be either xlsx, csv or csv2")
     break
