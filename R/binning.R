@@ -81,6 +81,32 @@ binning <- function(input,
     # Main loop scaled binning
     if(binning == 'scaled'){
 
+      # Check if all required columns are available for forward loop
+      check.pos <- x
+      vector.pos <- c(1:check.pos)
+      missings <- setdiff(vector.pos, names(df2))
+
+      if(length(missings) != 0){
+        for(i in missings){
+          df2[as.character(i)] <- NA
+          df2 <- df2 %>% select(as.character(i), everything())
+          print(paste0("Added"," ", length(missings)," ","empty column(s) to forward loop."," - ", marker))
+        }
+      }
+
+      # Check if all required columns are available for backward loop
+      check.neg = 0 - x + 1
+      vector.neg <- c(check.neg:0)
+      missings <- setdiff(vector.neg, names(df2))
+
+      if(length(missings) != 0){
+        for(i in rev(missings)){
+          df2[as.character(i)] <- NA
+          df2 <- df2 %>% select(as.character(i), everything())
+          print(paste0("Added"," ", length(missings)," ","empty column(s) to backward loop."," - ", marker))
+        }
+      }
+
       # Set up variables
       begin = grep("^1$", colnames(df2))
       begin.d = begin - 1
@@ -128,6 +154,13 @@ binning <- function(input,
       output.down<-output.down[,order(ncol(output.down):1)]
       df.mean <- cbind(output.down,output.up)
       df.mean[is.na(df.mean)]<- ""
+
+      # If cols were added, change name appropriately
+      if("output.up" %in% names(df.mean)){
+        names(df.mean)[names(df.mean) == "output.up"] <- paste0("Days",1,"_",x )
+      } else if("output.down" %in% names(df.mean)){
+        names(df.mean)[names(df.mean) == "output.down"] <-paste0("Days",(0 - x + 1),"_",0 )
+      }
 
       # Save to xlsx sheet
       if(write.out == T && sheets == T){
