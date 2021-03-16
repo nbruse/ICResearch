@@ -89,7 +89,6 @@ binning <- function(input,
       if(length(missings) != 0){
         for(i in missings){
           df2[as.character(i)] <- NA
-          df2 <- df2 %>% select(as.character(i), everything())
           print(paste0("Added"," ", length(missings)," ","empty column(s) to forward loop."," - ", marker))
         }
       }
