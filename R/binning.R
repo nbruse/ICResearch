@@ -49,6 +49,7 @@ binning <- function(input,
   df<-as.data.frame(df)
   rownames(df)<-df[,1]
   df[,1]<-NULL
+
   if(binning == 'scaled'){
     df[,1]<-NULL
   }
@@ -126,6 +127,9 @@ binning <- function(input,
           naming <- paste0("Days",colnames(df2)[begin],"_",colnames(df2)[end])
           names.up <- c(names.up, naming)
           begin = begin + x
+          if(div.up == 1){
+            break
+          }
         }
       }
 
@@ -143,6 +147,9 @@ binning <- function(input,
           naming <- paste0(marker,"_days",colnames(df2)[end],"_",colnames(df2)[begin.d])
           names.down <- c(names.down, naming)
           begin.d = begin.d - x
+          if(div.down == 1){
+            break
+          }
         }
       }
 
