@@ -60,7 +60,7 @@ align <- function(input,
   for(marker in markers){
 
     # Make and clean up data frame for the selected marker
-    df3 <- df %>% select(matches(marker, ignore.case = T))
+    df3 <- df %>% select(matches(paste0("^",marker), ignore.case = T))
     df4 <- cbind(df2,df3)
     rownames(df4)<-df4[,1]
     df4[,1] <- NULL
